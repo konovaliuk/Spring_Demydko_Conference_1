@@ -1,0 +1,12 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="ua">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" th:href="@{/css/styles.css}"/>
+</head>
+<body>
+<div th:insert="header :: copy"></div>
+<h2 align="center" style="margin-top: 10%" th:utext="#{label.successRegister(${session.user.name})}"></h2>
+</body>
+</html>

@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="ua">
+<head>
+    <meta charset="UTF-8">
+    <title th:text="#{label.title}"></title>
+</head>
+<body>
+<div th:fragment="copy">
+<div class="header">
+
+    <div class="headerLeft" th:if="${session.user!=null}">
+        <span class="headerLeft" th:utext="#{label.enterAs(${session.user.name},${session.user.surname})}"></span>
+        <span th:if="${session.user.position.position=='Speaker'}">
+            <span class="headerLeft" th:utext="#{bonuses(${session.user.bonuses})}"></span>
+        </span>
+            <span th:if="${not #request.getRequestURI().endsWith('/cabinet/mainPage')}">
+                <form class="headerLeft" method="post" action="/cabinet/mainPage">
+                    <span><input type="submit" th:value="#{label.cabinet}"></span>
+                </form>
+            </span>
+        <form class="headerLeft" method="get" action="/welcome/logout">
+        <span><input type="submit" th:value="#{label.exit}"></span>
+    </form>
+    </div>
+
+    <form class="headerRight" method="get" action="/welcome/changeLanguage">
+        <input type="hidden" name="requestURI" th:value="${#request.getRequestURI()}">
+        <span>
+            <select size="1" name="language" onchange="submit()">
+                <option th:text="#{label.language}"></option>
+                <option value="en">English</option>
+                <option value="ua">Українська</option>
+                <option value="ru">Русский</option>
+            </select>
+        </span>
+    </form>
+</div>
+</div>
+</body>
+</html>

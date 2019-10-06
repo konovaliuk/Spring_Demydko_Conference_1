@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="ua">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" th:href="@{/css/styles.css}"/>
+</head>
+<body>
+<div th:insert="header :: copy"></div>
+<h2></h2>
+<div class="center">
+    <div class="assign">
+        <form method="post" action="/moderator/editReport">
+            <p>Id: <span th:utext="${session.offeredReport.id}"></span></p>
+            <p><span th:utext="#{label.theme(${session.offeredReport.name})}"></span></p>
+            <p><span th:if="${session.offeredReport.speaker!= null}" th:utext="#{label.speaker(${session.offeredReport.speaker.name},${session.offeredReport.speaker.surname})}"></span></p>
+            <p><span th:text="#{label.static.date}"></span>: <input type="date" required name="date" pattern="yyyy-MM-dd"/></p>
+            <p><span th:text="#{label.static.time}"></span>: <input type="time" required name="time"/></p>
+            <p><input type="text" th:placeholder="#{label.static.city}" required name="city"
+                pattern="[а-яА-Яa-zA-ZЇїЄєІі]{2,30}" size="25"/>
+            </p>
+            <p><input type="text" th:placeholder="#{label.static.street}" required name="street"
+                      pattern="[а-яА-Яa-zA-ZЇїЄєІі\-\s]{2,50}" size="25"/>
+            </p>
+            <p><input type="text" th:placeholder="#{label.static.building}" required name="building"
+                      pattern="[а-яА-Яa-zA-ZЇїЄєІі0-9\s/-]{1,10}" size="25"/>
+            </p>
+            <p><input type="text" th:placeholder="#{label.static.room}" required name="room"
+                      pattern="[а-яА-Яa-zA-ZЇїЄєІі0-9]{1,5}" size="25"/>
+            </p>
+            <p><input type="submit" th:value="#{label.pinReport}"/></p>
+        </form>
+    </div>
+    <p th:switch="${message}">
+        <span th:case="'successfulChanges'"> <span th:text="#{successfulChanges}"></span></span>
+        <span th:case="'errorEmptyForm'"> <span th:text="#{errorEmptyForm}"></span></span>
+        <span th:case="'errorAddress'"> <span th:text="#{errorAddress}"></span></span>
+    </p>
+</div>
+</body>
+</html>

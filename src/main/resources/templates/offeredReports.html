@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="ua">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" th:href="@{/css/styles.css}"/>
+</head>
+<body>
+<div th:insert="header :: copy"></div>
+<h2 align="center" th:utext="#{label.offeredReports}"></h2>
+<div class="center">
+    <tr th:each="report,iterStat : ${session.offeredReports}" th:class="${iterStat.index}? 'index'">
+
+        <div class="offeredReports">
+            <p>id:<span th:text="${report.id}"></span></p>
+            <p th:text="#{label.theme(${report.name})}"></p>
+
+            <p><span th:utext="#{label.static.speaker}"></span>:
+                <span th:if="${report.speaker!= null}" th:text="${report.speaker.name}"></span>
+                <span th:if="${report.speaker!= null}" th:text="${report.speaker.surname}"></span>
+            </p>
+
+<!--            <p th:if="${report.speaker!= null}" th:text="#{label.speaker(${report.speaker.name},${report.speaker.surname})}"></p>-->
+            <form method="get" action="/moderator/offeredReport">
+                <input type="hidden" name="index" th:value="${iterStat.index}">
+                <input type="submit" th:value="#{label.makeChangesAndConfirm}">
+            </form>
+            <form method="post" action="/moderator/deleteOfferedReport">
+                <input type="hidden" name="reportId" th:value="${report.id}">
+                <input type="submit" th:value="#{label.delete}">
+            </form>
+        </div>
+    </tr>
+</div>
+
+
+<div class="blockBottom">
+    <tr th:each="button,iterStat : ${session.offeredButtons}" th:class="${iterStat.index}? 'index'">
+        <form class="buttons" method="get" action="/moderator/offeredReports">
+            <input type="hidden" name="page" th:value="${button}-1">
+            <span th:if="${session.offeredPage==button-1}">
+                      <input class="b" type="submit" th:value="${button}"></span>
+            <span th:unless="${session.offeredPage==button-1}">
+                       <input type="submit" th:value="${button}"></span>
+        </form>
+    </tr>
+</div>
+
+<div class="elements">
+    <span th:utext="#{label.amountElementsOnPage}"></span>
+    <form method="get" action="/moderator/offeredReports">
+        <select size="1" name="size" onchange="submit()">
+            <option th:utext="${session.offeredSize}"></option>
+            <option value="1">1</option>
+            <option value="2">2</option>
+            <option value="3">3</option>
+            <option value="4">4</option>
+            <option value="5">5</option>
+            <option value="6">6</option>
+            <option value="7">7</option>
+            <option value="8">8</option>
+            <option value="9">9</option>
+            <option value="10">10</option>
+        </select>
+    </form>
+</div>
+
+</body>
+</html>

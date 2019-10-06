@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="ua">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+<!--    <link rel="stylesheet" href="styles.css">-->
+    <link rel="stylesheet"  th:href="@{/css/styles.css}"/>
+<!--    <link rel="stylesheet" type="text/css" media="all" href="../static/css/styles.css" th:href="@{/css/styles.css}"/>-->
+</head>
+<body>
+<span th:insert="header :: copy"></span>
+<h2 align="center" th:text="#{label.welcome}"></h2>
+
+<div class="center">
+    <div class="index">
+        <form method="get" action="/welcome/registerPage">
+            <p><input type="submit" th:value="#{label.signUp}"></p>
+        </form>
+        <form method="get" action="/welcome/loginPage">
+            <p><input type="submit"  th:value="#{label.signIn}"></p>
+        </form>
+    </div>
+</div>
+</body>
+</html>

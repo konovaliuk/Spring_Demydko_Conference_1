@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="ua">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" th:href="@{/css/styles.css}"/>
+</head>
+<body>
+<div th:insert="header :: copy"></div>
+<h2 align="center" th:utext="#{label.cabinet}"></h2>
+<div class="center">
+    <div class="blockForButtons">
+        <form method="get" action="/cabinet/futureReports">
+            <p><input type="submit" th:value="#{label.futureReports}"/></p>
+        </form>
+    </div>
+
+
+    <span th:switch="${session.user.position.position}">
+                <span th:case="'Admin'">
+
+            <div class="admin">
+                <p th:utext="#{label.assignToPosition}"></p>
+                <form method="post" action="/admin/assignToPosition">
+                    <p><input type="email" name="email" required
+                              th:placeholder="#{label.userEmail}" size="25"
+                              pattern="[a-z0-9_%+-]+@[a-z0-9_]+\.[a-z]{2,}[\.a-z]{0,}"/></p>
+                    <p>
+                        <select size="1" name="userType">
+                            <option value="Moderator" th:utext="#{label.moderator}"></option>
+                            <option value="Admin" th:utext="#{label.admin}"></option>
+                            <option value="Speaker" th:utext="#{label.static.speaker}"></option>
+                            <option value="User" th:utext="#{label.user}"></option>
+                        </select>
+                    </p>
+                    <p><input type="submit" th:value="#{label.assignToPosition}"></p>
+                </form>
+            </div>
+            <div class="admin">
+                <p th:utext="#{label.addRatingToSpeaker}"></p>
+                <form method="post" action="/admin/addSpeakerRating">
+                    <p><input type="email" name="email" required
+                              th:placeholder="#{label.speakerEmail}" size="25"
+                              pattern="[a-z0-9_%+-]+@[a-z0-9_]+\.[a-z]{2,}[\.a-z]{0,}"/></p>
+                    <p>
+                        <select size="1" name="rating">
+                            <option value="1">1</option>
+                            <option value="1">2</option>
+                            <option value="3">3</option>
+                            <option value="4">4</option>
+                            <option value="5">5</option>
+                            <option value="6">6</option>
+                            <option value="7">7</option>
+                            <option value="8">8</option>
+                            <option value="9">9</option>
+                            <option value="10">10</option>
+                        </select>
+                    </p>
+                    <p><input type="submit" th:value="#{label.assignRating}"></p>
+                </form>
+            </div>
+            <div class="admin">
+                <p th:utext="#{label.addBonusesToSpeaker}"></p>
+                <form method="post" action="/admin/addBonuses">
+                    <p><input type="email" name="email" required
+                              th:placeholder="#{label.speakerEmail}" size="25"
+                              pattern="[a-z0-9_%+-]+@[a-z0-9_]+\.[a-z]{2,}[\.a-z]{0,}"/></p>
+                    <p><input type="text" th:placeholder="#{label.amountOfBonuses}" required
+                              name="bonuses" pattern="[0-9]{1,}"/></p>
+                    <input type="submit" th:value="#{label.addBonuses}">
+                </form>
+            </div>
+                </span>
+
+             <span th:case="'Moderator'">
+                 <div class="block1">
+                <p th:utext="#{label.addReport}"></p>
+                <form method="post" action="/moderator/addReport">
+                    <p><span th:utext="#{label.static.date}"></span>: <input type="date" name="date" pattern="yyyy-MM-dd"
+                                                       required></p>
+                    <p><span th:utext="#{label.static.time}"></span>: <input type="time" name="time" required></p>
+                    <p><textarea name="theme" th:placeholder="#{label.static.theme}" required></textarea></p>
+                    <p><input type="text" name="city" size="30" pattern="[а-яА-Яa-zA-ZЇїЄєІі]{2,30}"
+                              th:placeholder="#{label.static.city}" required/>
+                    </p>
+                    <p><input type="text" name="street" size="30" pattern="[а-яА-Яa-zA-ZЇїЄєІі\-\s]{2,50}"
+                              th:placeholder="#{label.static.street}" required/>
+                    </p>
+                    <p><input type="text" name="building" size="30" pattern="[а-яА-Яa-zA-ZЇїЄєІі0-9\s/-]{1,10}"
+                              th:placeholder="#{label.static.building}" required/>
+                    </p>
+                    <p><input type="text" name="room" size="30" pattern="[а-яА-Яa-zA-ZЇїЄєІі0-9]{1,5}"
+                              th:placeholder="#{label.static.room}" required/>
+                    </p>
+                    <p><input type="email" name="speakerEmail" size="30"
+                              pattern="[a-z0-9_%+-]+@[a-z0-9_]+\.[a-z]{2,}[\.a-z]{0,}"
+                              th:placeholder="#{label.choseSpeaker}" required/>
+                    </p>
+                    <p><input type="submit" th:value="#{label.addReport}"></p>
+                </form>
+            </div>
+            <div class="blockForButtons">
+                <form method="get" action="/moderator/offeredReports">
+                    <p><input type="submit" th:value="#{label.offeredReports}"></p>
+                </form>
+            </div>
+             </span>
+            <span th:case="'Speaker'">
+            <div class="block1">
+                <form method="post" action="/speaker/offerReport">
+                    <p><textarea name="theme" th:placeholder="#{label.static.theme}" required></textarea></p>
+                    <p><input type="submit" th:value="#{label.offerReport}"></p>
+                </form>
+            </div>
+            </span>
+            </span>
+
+    <div class="blockForButtons">
+        <form method="get" action="/cabinet/pastReports">
+            <p><input type="submit" th:value="#{label.pastReports}"></p>
+        </form>
+    </div>
+
+
+    <p th:switch="${message}">
+        <span th:case="'errorEmailForm'"> <span th:text="#{errorEmailForm}"></span></span>
+        <span th:case="'successfulChanges'"> <span th:text="#{successfulChanges}"></span></span>
+        <span th:case="'errorSpeakerNotExists'"> <span th:text="#{errorSpeakerNotExists}"></span></span>
+        <span th:case="'errorPosition'"> <span th:text="#{errorPosition}"></span></span>
+        <span th:case="'errorNumber'"> <span th:text="#{errorNumber}"></span></span>
+        <span th:case="'bonuses'"> <span th:text="#{bonuses}"></span></span>
+        <span th:case="'errorAddress'"> <span th:text="#{errorAddress}"></span></span>
+        <span th:case="'errorEmptyForm'"> <span th:text="#{errorEmptyForm}"></span></span>
+        <span th:case="'errorDate'"> <span th:text="#{errorDate}"></span></span>
+        <span th:case="'noActionDone'"> <span th:text="#{noActionDone}"></span></span>
+        <span th:case="'errorTheme'"> <span th:text="#{errorTheme}"></span></span>
+    </p>
+
+</div>
+</body>
+</html>

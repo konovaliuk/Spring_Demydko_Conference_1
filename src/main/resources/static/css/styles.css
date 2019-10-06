@@ -1,0 +1,171 @@
+body {
+    background-image: url("img/background.jpg");
+    background-size: cover;
+    font-family: cursive;
+}
+
+
+.futureReports{
+    border: solid 2px black;
+    width: 220px;
+    padding: 5px;
+    display: inline-block;
+    background-color: aliceblue;
+    text-align: center;
+    height: 450px;
+}
+.pastReports{
+    border: solid 2px black;
+    width: 220px;
+    padding: 5px;
+    margin-top: 5px;
+    display: inline-block;
+    background-color: aliceblue;
+    text-align: center;
+    height: 480px;
+}
+
+.offeredReports{
+    border: solid 2px black;
+    width: 220px;
+    padding: 5px;
+    display: inline-block;
+    background-color: aliceblue;
+    text-align: center;
+    height: 200px;
+}
+
+.headerLeft {
+    float: left;
+    margin-top: 10px;
+    margin-left: 6px;
+    padding-left: 6px;
+}
+
+.headerRight {
+    margin-top: 10px;
+    float: right;
+    padding-right: 30px;
+}
+h2{
+    padding-top: 20px;
+}
+
+.header {
+    position: fixed;
+    left: 0;
+    top: 0;
+    width: 100%;
+    display: inline-block;
+    background-color: powderblue;
+    height: 50px;
+    border: none;
+}
+
+.block1 {
+    width: 250px;
+    background: powderblue;
+    padding: 5px 20px 5px 5px;
+    border: solid 1px black;
+    display: inline-block;
+}
+
+.blockForButtons {
+    width: 200px;
+    padding: 5px 20px 5px 5px;
+    border: none;
+    background: none;
+    display: inline-block;
+
+    /*text-align: center;*/
+}
+
+.elements {
+    position: absolute;
+    text-align: center;
+    top: 0;
+    right: 15%;
+    height: 50px;
+    width: 260px;
+    background: none;
+    border: solid 1px black;
+}
+
+.index{
+    width: 200px;
+    margin-top: 10%;
+    border: solid 1px black;
+    text-align: center;
+    background: aliceblue;
+    display: inline-block;
+}
+
+.admin{
+    width: 220px;
+    height: 180px;
+    /*margin-top: 10%;*/
+    border: solid 1px black;
+    text-align: center;
+    background: powderblue;
+    display: inline-block;
+}
+
+.register{
+     width: 200px;
+     margin-top: 5%;
+     border: solid 1px black;
+     text-align: center;
+     background: powderblue;
+     display: inline-block;
+ }
+
+.assign{
+    width: 250px;
+    margin-top: 5%;
+    border: solid 1px black;
+    text-align: center;
+    background: powderblue;
+    display: inline-block;
+}
+
+.blockBottom {
+    position: relative;
+    text-align: center;
+    width: 99%;
+    bottom: 0;
+    left: 0;
+    background: none;
+}
+
+.buttons {
+    margin: 1px;
+    display: inline-block;
+}
+
+.b {
+    background: #ffcd90
+}
+
+.center {
+    /*position: fixed;*/
+    position: relative;
+    display: inline-block;
+    width: 99%;
+    left: 0;
+    margin-top: 10px;
+    text-align: center;
+    background: none;
+}
+
+.blockUpdateReport {
+    width: 570px;
+    text-align: center;
+    border: solid 1px black;
+    background-color: powderblue;
+    display: inline-block;
+}
+
+h2 {
+    margin-top: 50px;
+    width: 100%;
+}

@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="ua">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" th:href="@{/css/styles.css}"/>
+</head>
+<body>
+<div th:insert="header :: copy"></div>
+<h2></h2>
+<div class="center">
+    <div class="blockUpdateReport">
+        <form method="post" action="/moderator/updateReport">
+            <p>id: <span th:utext="${session.report.id}"></span></p>
+            <p><span th:utext="#{label.theme(${session.report.name})}"></span>
+                | <span th:utext="#{label.changeTheme}"></span>
+                <textarea name="theme"></textarea>
+            </p>
+            <hr>
+            <p><span th:utext="#{label.date(${#dates.format(session.report.date,'dd/MM/YYYY')})}"></span>
+                | <span th:utext="#{label.changeDate}"></span>
+                <span> <input type="date" name="date" pattern="yyyy-MM-dd"></span>
+            </p>
+            <hr>
+            <p><span th:utext="#{label.time(${#dates.format(session.report.time,'HH:mm')})}"></span>
+                | <span th:utext="#{label.changeTime}"></span>
+                <span> <input type="time" name="time"></span>
+            </p>
+            <hr>
+            <p><span th:utext="#{label.city(${session.report.address.city})}"></span>
+                | <span th:utext="#{label.changeCity}"></span>
+                <span> <input type="text" name="city" pattern="[а-яА-Яa-zA-ZЇїЄєІі]{2,30}"></span>
+            </p>
+            <hr>
+            <p><span th:utext="#{label.street(${session.report.address.street})}"></span>
+                | <span th:utext="#{label.changeStreet}"></span>
+                <span> <input type="text" name="street" pattern="[а-яА-Яa-zA-ZЇїЄєІі\-\s]{2,50}"></span>
+            </p>
+            <hr>
+            <p><span th:utext="#{label.building(${session.report.address.building})}"></span>
+                | <span th:utext="#{label.changeBuilding}"></span>
+                <span> <input type="text" name="building" pattern="[а-яА-Яa-zA-ZЇїЄєІі0-9\s/-]{1,10}"></span>
+            </p>
+            <hr>
+            <p ><span th:utext="#{label.room(${session.report.address.room})}"></span>
+                | <span th:utext="#{label.changeRoom}"></span>
+                <span> <input type="text" name="room" pattern="[а-яА-Яa-zA-ZЇїЄєІі0-9]{1,5}"></span>
+            </p>
+            <hr>
+            <p ><span th:if="${session.report.speaker!= null}" th:utext="#{label.speaker(${session.report.speaker.name},${session.report.speaker.surname})}"></span>
+                | <span th:utext="#{label.changeSpeaker}"></span>
+                <span> <input type="email" name="speakerEmail" th:placeholder="#{label.speakerEmail}"
+                              pattern="[a-z0-9_%+-]+@[a-z0-9_]+\.[a-z]{2,}[\.a-z]{0,}"></span>
+            </p>
+            <p><input type="submit" th:value="#{label.changeReport}"></p>
+        </form>
+    </div>
+    <p th:switch="${message}">
+        <span th:case="'errorEmailForm'"> <span th:text="#{errorEmailForm}"></span></span>
+        <span th:case="'successfulChanges'"> <span th:text="#{successfulChanges}"></span></span>
+        <span th:case="'noActionDone'"> <span th:text="#{noActionDone}"></span></span>
+        <span th:case="'errorAddress'"> <span th:text="#{errorAddress}"></span></span>
+        <span th:case="'errorDate'"> <span th:text="#{errorDate}"></span></span>
+        <span th:case="'errorTheme'"> <span th:text="#{errorTheme}"></span></span>
+        <span th:case="'errorSpeakerNotExists'"> <span th:text="#{errorSpeakerNotExists}"></span></span>
+    </p>
+</div>
+</body>
+</html>
